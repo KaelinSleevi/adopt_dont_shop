@@ -22,7 +22,7 @@ RSpec.describe 'The Applicants Show Page' do
     it 'links to the new page from the Pet index' do
         visit '/pets'
 
-        click_link('Start an Application')
+        click_link("Start an Application: Lucille Bald")
         expect(current_path).to eq('/applications/new')
     end
 
@@ -39,7 +39,7 @@ RSpec.describe 'The Applicants Show Page' do
 
         click_button('Submit')
 
-        expect(current_path).to eq('/pets')
+        expect(current_path).to eq("/applications/#{@application.id}")
         expect(page).to have_content("Kaelin")
     end
 end
