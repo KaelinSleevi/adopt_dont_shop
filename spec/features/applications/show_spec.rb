@@ -10,7 +10,6 @@ RSpec.describe 'The Applicants Show Page' do
 
     it 'displays the Applicants name' do
         visit "/applications/#{@applicant1.id}"
-        save_and_open_page
         expect(page).to have_content(@applicant1.name)
     end
 
