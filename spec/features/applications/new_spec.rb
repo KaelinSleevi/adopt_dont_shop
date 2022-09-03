@@ -37,7 +37,7 @@ RSpec.describe 'The Applicants Show Page' do
         fill_in "application[state]", with: "CO"
         fill_in "application[zipcode]", with: "80207"
 
-        click_button('Submit')
+        click_button('Submit Application')
 
         expect(current_path).to eq("/applications/#{@application.id}")
         expect(page).to have_content("Kaelin")
