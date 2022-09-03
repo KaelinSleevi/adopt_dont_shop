@@ -45,12 +45,11 @@ RSpec.describe 'The Applicants Show Page' do
         fill_in "Zipcode:", with: "80207"
 
         click_button('Submit Application')
-
         expect(current_path).to eq("/applications/new")
         expect(page).to have_content("All fields must be filled to submit your application.")
     end
 
-    it 'will be able to search for desired animal' do
+    xit 'will be able to search for desired animal' do
         visit '/applications/new'
         expect(page.has_field?).to eq(true)
         # expect(page.has_link)
@@ -60,7 +59,7 @@ RSpec.describe 'The Applicants Show Page' do
         fill_in "Search By Name:", with: "Lobster" #{pet2.name}
         click_button('Submit')
         expect(page).to have_content(@pet_2.name)
-        
+
         # In that section I see an input where I can search for Pets by name
         # When I fill in this field with a Pet's name
         # And I click submit,

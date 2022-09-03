@@ -17,6 +17,12 @@ class ApplicationsController < ApplicationController
         @application = Application.find(params[:id])
     end
 
+    def update
+        @application = Application.find(params[:id])
+        @pets = Pet.find(params[:id])
+
+    end
+
     private
 
     def apps_params
