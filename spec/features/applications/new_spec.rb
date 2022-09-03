@@ -1,28 +1,18 @@
 require 'rails_helper'
 
-# Starting an Application
-
-# As a visitor
-# When I visit the pet index page
-# Then I see a link to "Start an Application"
-# When I click this link
-# Then I am taken to the new application page where I see a form
-# When I fill in this form with my:
-#   - Name
-#   - Street Address
-#   - City
-#   - State
-#   - Zip Code
-# And I click submit
-# Then I am taken to the new application's show page
-# And I see my Name, address information, and description of why I would make a good home
-# And I see an indicator that this application is "In Progress"
-
 RSpec.describe 'The Applicants Show Page' do
+    before(:each) do
+        @shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+
+        @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: @shelter.id)
+        @pet_2 = Pet.create!(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: @shelter.id)
+
+        @application = Application.create!(name: "Kaelin S", street_address: "1289 South St", city: "Denver", state: "CO", zipcode: "80207", status: "Pending")
+    end
     it 'links to the new page from the Pet index' do
         visit '/pets'
 
-        click_link("Start an Application: Lucille Bald")
+        click_link("Start an Application: #{@pet_1.name}")
         expect(current_path).to eq('/applications/new')
     end
 
@@ -31,15 +21,15 @@ RSpec.describe 'The Applicants Show Page' do
 
         expect(page.has_field?).to eq(true)
 
-        fill_in "application[name]", with: "Kaelin"
-        fill_in "application[street_address]", with: "1289 South St"
-        fill_in "application[city]", with: "Denver"
-        fill_in "application[state]", with: "CO"
-        fill_in "application[zipcode]", with: "80207"
+        fill_in "Name:", with: "Kaelin S"
+        fill_in "Address:", with: "1289 South St"
+        fill_in "City:", with: "Denver"
+        fill_in "State:", with: "CO"
+        fill_in "Zipcode:", with: "80207"
 
-        click_button('Submit')
+        click_button('Submit Application')
 
-        expect(current_path).to eq("/applications/#{@application.id}")
+        expect(current_path).to eq("/applications/#{@application.id + 1}")
         expect(page).to have_content("Kaelin")
     end
 end

@@ -5,13 +5,15 @@ class ApplicationsController < ApplicationController
 
     def create
         @application = Application.create!({
-            name: params[:application][:name],
-            street_address: params[:application][:street_address],
-            city: params[:application][:city],
-            state: params[:application][:state],
-            zipcode: params[:application][:zipcode],
-            status: params[:application][:status]
+            name: params[:name],
+            street_address: params[:street_address],
+            city: params[:city],
+            state: params[:state],
+            zipcode: params[:zipcode],
+            status: params[:status]
             })
+
+        redirect_to "/applications/#{@application.id}"
     end
 
     def show
