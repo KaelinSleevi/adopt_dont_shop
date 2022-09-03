@@ -15,12 +15,19 @@ class ApplicationsController < ApplicationController
 
     def show
         @application = Application.find(params[:id])
+        @pets = @application.pets.find(params[:id])
+    end
+
+    def edit
+        @application = Application.find(params[:id])
     end
 
     def update
         @application = Application.find(params[:id])
         @pets = Pet.find(params[:id])
-
+        @application.update(apps_params)
+        @application.save
+        redirect_to "/applications/#{@application.id}"
     end
 
     private
