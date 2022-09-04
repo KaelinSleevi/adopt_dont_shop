@@ -40,7 +40,7 @@ RSpec.describe 'The Applicants Show Page' do
 
     it 'will be able to search for desired animal' do
         visit "/applications/#{@applicant1.id}"
-        expect(page.has_field?).to eq(true)
+        expect(page.has_field?).to eq(false)
   
         fill_in 'Search', with: "Lobster"
         click_button('Submit')

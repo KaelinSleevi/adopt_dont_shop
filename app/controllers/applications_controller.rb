@@ -1,11 +1,11 @@
 class ApplicationsController < ApplicationController
     def new
-    
+        
     end
 
     def create
-
         @application = Application.new(apps_params)
+        @application.status = "In Progress"
         if @application.save
             redirect_to "/applications/#{@application.id}"
         else
@@ -19,15 +19,20 @@ class ApplicationsController < ApplicationController
         if params[:search].present?
             @pets = Pet.search(params[:search])
         end
-
     end
 
     def edit
         @application = Application.find(params[:id])
+        @application.status = "Pending"   
+        @application.description = params[:query]
+        @application.update(apps_params)
+        @application.save
+        redirect_to "/applications/#{@application.id}" 
     end
 
     def update
         @application = Application.find(params[:id])
+     
         @application.update(apps_params)
         @application.save
         redirect_to "/applications/#{@application.id}" 
@@ -46,7 +51,7 @@ class ApplicationsController < ApplicationController
     private
 
     def apps_params
-        params.permit(:name, :street_address, :city, :state, :zipcode)
+        params.permit(:name, :street_address, :city, :state, :zipcode, :description, :status)
     end
 
 end
