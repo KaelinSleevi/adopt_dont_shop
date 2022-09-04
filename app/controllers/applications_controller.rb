@@ -4,6 +4,7 @@ class ApplicationsController < ApplicationController
     end
 
     def create
+
         @application = Application.new(apps_params)
         if @application.save
             redirect_to "/applications/#{@application.id}"
@@ -18,6 +19,7 @@ class ApplicationsController < ApplicationController
         if params[:search].present?
             @pets = Pet.search(params[:search])
         end
+
     end
 
     def edit
@@ -30,6 +32,12 @@ class ApplicationsController < ApplicationController
         @application.update(apps_params)
         @application.save
         redirect_to "/applications/#{@application.id}"
+        # if @application.save
+        #     require 'pry'; binding.pry
+        #     @application.pets << @pets
+        # else
+        #     redirect_to "/applications/#{@application.id}"
+        # end
     end
 
     private
