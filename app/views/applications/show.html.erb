@@ -24,5 +24,12 @@
   <% end %>
 <% end %>
 
+<%= form_with url: "/applications/#{@application.id}/#{pet.id}", to:'applications#update', method: :patch, local: true do |f| %>
+  <%= f.label :description, "Y THO" %>
+  <%= f.text_field :description %>
+  <%= f.submit "Submit Application" %>
+<% end %>
+
+
 
 

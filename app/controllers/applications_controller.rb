@@ -28,10 +28,10 @@ class ApplicationsController < ApplicationController
 
     def update
         @application = Application.find(params[:id])
-        @pets = Pet.find(params[:pet_id]) #maybe assign @pets after pet is chosen to get right id?
+        @pets = Pet.find(params[:pet_id])
         @application.update(apps_params)
         @application.save
-        redirect_to "/applications/#{@application.id}" #are we missing petid after this?
+        redirect_to "/applications/#{@application.id}" 
         if @application.save
             @application.pets << @pets
         else
