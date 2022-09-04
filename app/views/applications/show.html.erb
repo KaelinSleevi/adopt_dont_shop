@@ -7,29 +7,31 @@
 <h5>Pets: <% @application.pets.each do |pet| %>
   <%= pet.name %>
 <% end %></h5>
+<h5>Description: <%= @application.description %></h5>
 <h5>Application Status: <%= @application.status %></h5>
-<h4> Add a Pet to this Application: </h4>
 
-<%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
-  <%= f.label :search %>
-  <%= f.text_field :search, params: :search %>
-  <%= f.submit "Submit" %>
+<% if @application.status == "In Progress" %>
+  <h4> Add a Pet to this Application: </h4>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
+    <%= f.label :search %>
+    <%= f.text_field :search, params: :search %>
+    <%= f.submit "Submit" %>
 
-<% end %>
+  <% end %>
 
-<% if @pets != nil %>
-  <% @pets.each do |pet| %>
-      <%= link_to "#{pet.name}", "/pets/#{pet.id}"%>
-      <%= button_to "Adopt #{pet.name}", "/applications/#{@application.id}/#{pet.id}", method: :patch %>
+  <% if @pets != nil %>
+    <% @pets.each do |pet| %>
+        <%= link_to "#{pet.name}", "/pets/#{pet.id}"%>
+        <%= button_to "Adopt #{pet.name}", "/applications/#{@application.id}/#{pet.id}", method: :patch %>
+    <% end %>
+  <% end %>
+
+  <%= form_with url: "/applications/#{@application.id}/", to:'applications#edit', method: :patch, local: true do |f| %>
+    <%= f.label :description, "TELL ME WHY" %>
+    <%= f.text_field :description %>
+    <%= f.submit "Submit Application" %> 
   <% end %>
 <% end %>
-
-<%= form_with url: "/applications/#{@application.id}/", to:'applications#update', method: :patch, local: true do |f| %>
-  <%= f.label :description, "TELL ME WHY" %>
-  <%= f.text_field :description %>
-  <%= f.submit "Submit Application" %> ##disable_with?
-<% end %>
-
 
 
 

@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2022_09_03_052024) do
     t.string "state"
     t.string "zipcode"
     t.string "status"
+    t.string "description"
   end
 
   create_table "pets", force: :cascade do |t|
