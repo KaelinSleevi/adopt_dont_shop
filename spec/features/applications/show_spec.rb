@@ -5,7 +5,7 @@ RSpec.describe 'The Applicants Show Page' do
         @shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
         @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: @shelter.id)
         @pet_2 = Pet.create!(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: @shelter.id)
-        @applicant1 = Application.create!(name: "Sandy", street_address: "123 ABC St.", city: "Denver", state: "CO", zipcode: "80241", status: "Pending")
+        @applicant1 = Application.create!(name: "Sandy", street_address: "123 ABC St.", city: "Denver", state: "CO", zipcode: "80241", status: "In Progress")
     end
 
     it 'displays the Applicants name' do
@@ -40,8 +40,7 @@ RSpec.describe 'The Applicants Show Page' do
 
     it 'will be able to search for desired animal' do
         visit "/applications/#{@applicant1.id}"
-        expect(page.has_field?).to eq(false)
-  
+
         fill_in 'Search', with: "Lobster"
         click_button('Submit')
         expect(page).to have_content(@pet_2.name)
@@ -50,6 +49,7 @@ RSpec.describe 'The Applicants Show Page' do
     it 'can add a pet to an application' do
         visit "/applications/#{@applicant1.id}"
         fill_in 'Search', with: "Lobster"
+
         click_button('Submit')
         click_button("Adopt #{@pet_2.name}")
 
@@ -61,9 +61,9 @@ RSpec.describe 'The Applicants Show Page' do
         fill_in 'Search', with: "Lobster"
         click_button('Submit')
         click_button("Adopt #{@pet_2.name}")
-
-        fill_in 'Description', with: "I want pet because I need pet, ty"
-        click_button('Submit this Application')
+        
+        fill_in 'Description:', with: "I want pet because I need pet, ty"
+        click_button('Submit Application')
         expect(current_path).to eq("/applications/#{@applicant1.id}")
         expect(page).to have_content("Application Status: Pending")
         expect(page).to have_content("#{@pet_2.name}")
