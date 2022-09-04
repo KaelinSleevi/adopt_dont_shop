@@ -28,15 +28,19 @@ class ApplicationsController < ApplicationController
 
     def update
         @application = Application.find(params[:id])
-        @pets = Pet.find(params[:pet_id])
         @application.update(apps_params)
         @application.save
         redirect_to "/applications/#{@application.id}" 
-        if @application.save
-            @application.pets << @pets
-        else
-            redirect_to "/applications/#{@application.id}"
+        if params[:pet_id] != nil
+            @pets = Pet.find(params[:pet_id])
+            
+            if @application.save
+                @application.pets << @pets
+            else
+                redirect_to "/applications/#{@application.id}"
+            end
         end
+        
     end
 
     private
