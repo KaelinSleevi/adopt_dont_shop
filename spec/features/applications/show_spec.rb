@@ -69,5 +69,4 @@ RSpec.describe 'The Applicants Show Page' do
         expect(page).to have_content("#{@pet_2.name}")
         expect(page).to_not have_content("Submit this Application")
     end
-
 end
