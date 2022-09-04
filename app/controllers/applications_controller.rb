@@ -34,7 +34,6 @@ class ApplicationsController < ApplicationController
         redirect_to "/applications/#{@application.id}" #are we missing petid after this?
         if @application.save
             @application.pets << @pets
-            require 'pry'; binding.pry
         else
             redirect_to "/applications/#{@application.id}"
         end
