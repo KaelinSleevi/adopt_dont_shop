@@ -46,4 +46,14 @@ RSpec.describe 'The Applicants Show Page' do
         click_button('Submit')
         expect(page).to have_content(@pet_2.name)
     end
+    
+    it 'can add a pet to an application' do
+        visit "/applications/#{@applicant1.id}"
+        fill_in 'Search', with: "Lobster"
+        click_button('Submit')
+        click_button("Adopt #{@pet_2.name}")
+
+        expect(page).to have_content("#{@pet_2.name}")
+    end
+
 end

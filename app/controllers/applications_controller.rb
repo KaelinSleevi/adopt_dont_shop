@@ -4,6 +4,7 @@ class ApplicationsController < ApplicationController
     end
 
     def create
+
         @application = Application.new(apps_params)
         if @application.save
             redirect_to "/applications/#{@application.id}"
@@ -18,6 +19,7 @@ class ApplicationsController < ApplicationController
         if params[:search].present?
             @pets = Pet.search(params[:search])
         end
+
     end
 
     def edit
@@ -26,10 +28,16 @@ class ApplicationsController < ApplicationController
 
     def update
         @application = Application.find(params[:id])
-        @pets = Pet.find(params[:id])
+        @pets = Pet.find(params[:pet_id]) #maybe assign @pets after pet is chosen to get right id?
         @application.update(apps_params)
         @application.save
-        redirect_to "/applications/#{@application.id}"
+        redirect_to "/applications/#{@application.id}" #are we missing petid after this?
+        if @application.save
+            @application.pets << @pets
+            require 'pry'; binding.pry
+        else
+            redirect_to "/applications/#{@application.id}"
+        end
     end
 
     private

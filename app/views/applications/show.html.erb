@@ -4,8 +4,10 @@
 <h5>City: <%= @application.city %></h5>
 <h5>State: <%= @application.state %></h5>
 <h5>Zipcode: <%= @application.zipcode %></h5>
+<h5>Pets: <% @application.pets.each do |pet| %>
+  <%= pet.name %>
+<% end %></h5>
 <h5>Application Status: <%= @application.status %></h5>
-
 <h4> Add a Pet to this Application: </h4>
 
 <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
@@ -17,7 +19,8 @@
 
 <% if @pets != nil %>
   <% @pets.each do |pet| %>
-      <%= pet.name %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}"%>
+      <%= button_to "Adopt #{pet.name}", "/applications/#{@application.id}/#{pet.id}", method: :patch %>
   <% end %>
 <% end %>
 
