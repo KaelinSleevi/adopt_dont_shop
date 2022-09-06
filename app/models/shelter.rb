@@ -29,7 +29,7 @@ class Shelter < ApplicationRecord
   end
 
   def self.alphabetical_shelters
-    order(name: :desc)
+    Shelter.find_by_sql("SELECT * FROM shelters ORDER BY name DESC")
   end
 
   def shelter_pets_filtered_by_age(age_filter)
