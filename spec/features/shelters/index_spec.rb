@@ -112,6 +112,13 @@ RSpec.describe 'the shelters index' do
       expect(@shelter_3.name).to appear_before(@shelter_2.name)
       expect(@shelter_2.name).to appear_before(@shelter_1.name)
       expect(@shelter_1.name).to_not appear_before(@shelter_3.name)
-      save_and_open_page
+  end
+
+  it 'can display a section of shelters with pending applications' do
+    visit '/admin/shelters'
+
+    expect(current_path).to eq('/admin/shelters')
+    expect(page).to have_content("Shelter's with Pending Applications")
+    expect(page).to have_content(@shelter_3.name)
   end
 end
