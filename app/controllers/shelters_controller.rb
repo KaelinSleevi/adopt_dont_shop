@@ -53,6 +53,10 @@ class SheltersController < ApplicationController
     end
   end
 
+  def admin_index
+    @shelters = Shelter.alphabetical_shelters
+  end
+
   def destroy
     shelter = Shelter.find(params[:id])
     shelter.destroy

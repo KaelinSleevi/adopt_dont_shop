@@ -28,6 +28,10 @@ class Shelter < ApplicationRecord
     adoptable_pets.order(name: :asc)
   end
 
+  def self.alphabetical_shelters
+    order(name: :desc)
+  end
+
   def shelter_pets_filtered_by_age(age_filter)
     adoptable_pets.where('age >= ?', age_filter)
   end
