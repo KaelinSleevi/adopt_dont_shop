@@ -84,7 +84,6 @@ RSpec.describe 'The Applicants Show Page' do
         visit "/admin/applications/#{@applicant2.id}"
         click_button('Approve Application')
         expect(page).to have_content('Lucille Bald Approved')
-        save_and_open_page
         expect(page).to_not have_content('Approve Application')
     end
 end
