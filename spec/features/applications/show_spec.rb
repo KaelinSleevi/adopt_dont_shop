@@ -6,6 +6,8 @@ RSpec.describe 'The Applicants Show Page' do
         @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: @shelter.id)
         @pet_2 = Pet.create!(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: @shelter.id)
         @applicant1 = Application.create!(name: "Sandy", street_address: "123 ABC St.", city: "Denver", state: "CO", zipcode: "80241", status: "In Progress")
+        @applicant2 = Application.create!(name: "Kaelin", street_address: "567 CBA Ave.", city: "Thornton", state: "CO", zipcode: "80020", status: "In Progress")
+
     end
 
     it 'displays the Applicants name' do
@@ -71,9 +73,18 @@ RSpec.describe 'The Applicants Show Page' do
     end
 
     it 'shows a button to approve applications when visiting application show page, and shows approved pets' do
-        visit "/admin/applications/#{@applicant1.id}"
+        visit "/applications/#{@applicant2.id}"
+        fill_in 'Search', with: "Lucille Bald"
+        click_button('Submit')
+        click_button("Adopt #{@pet_1.name}")
+        
+        fill_in 'Description:', with: "I want pet because I need pet, ty"
+        click_button('Submit Application')
+        
+        visit "/admin/applications/#{@applicant2.id}"
         click_button('Approve Application')
+        expect(page).to have_content('Lucille Bald Approved')
+        save_and_open_page
         expect(page).to_not have_content('Approve Application')
-        expect(page).to have_content('Lucille Approved')
     end
 end
