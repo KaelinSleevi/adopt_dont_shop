@@ -55,6 +55,7 @@ class SheltersController < ApplicationController
 
   def admin_index
     @shelters = Shelter.alphabetical_shelters
+    @pending_shelters = Shelter.shelter_with_pending_status
   end
 
   def destroy
