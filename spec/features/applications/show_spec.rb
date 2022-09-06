@@ -69,4 +69,11 @@ RSpec.describe 'The Applicants Show Page' do
         expect(page).to have_content("#{@pet_2.name}")
         expect(page).to_not have_content("Submit this Application")
     end
+
+    it 'shows a button to approve applications when visiting application show page, and shows approved pets' do
+        visit "/admin/applications/#{@applicant1.id}"
+        click_button('Approve Application')
+        expect(page).to_not have_content('Approve Application')
+        expect(page).to have_content('Lucille Approved')
+    end
 end
