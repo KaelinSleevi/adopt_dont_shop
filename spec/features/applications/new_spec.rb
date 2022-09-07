@@ -20,7 +20,7 @@ RSpec.describe 'The Applicants Show Page' do
         visit '/applications/new'
 
         expect(page.has_field?).to eq(true)
-
+        require "pry"; binding.pry
         fill_in "Name:", with: "Kaelin S"
         fill_in "Address:", with: "1289 South St"
         fill_in "City:", with: "Denver"
