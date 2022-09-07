@@ -39,4 +39,9 @@ RSpec.describe Pet, type: :model do
       end
     end
   end
+
+  describe 'should have and have many' do
+    it {should have_many(:application_pets)}
+    it {should have_many(:applications)}
+  end
 end
