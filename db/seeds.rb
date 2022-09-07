@@ -11,7 +11,7 @@
 ApplicationPet.destroy_all
 Pet.destroy_all
 Application.destroy_all
-Shleter.destroy_all
+Shelter.destroy_all
 
 @shelter1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 @shelter2 = Shelter.create!(name: 'Denver shelter', city: 'Denver, CO', foster_program: false, rank: 5)
