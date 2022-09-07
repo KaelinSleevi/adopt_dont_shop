@@ -11,11 +11,19 @@
 <h5>Application Status: <%= @application.status %></h5>
 
 <% if @application.status == "Pending" %>
-    <%= button_to "Approve Application", "/admin/applications/#{@application.id}", method: :patch %>
+    <%= button_to "Approve Application", "/admin/applications/#{@application.id}", params: {:status => "Approved"}, method: :patch %>
+    <%= button_to "Reject Application", "/admin/applications/#{@application.id}", params: {:status => "Rejected"}, method: :patch%>
 <% elsif @application.status == "Approved" %>
     <p><% @application.pets.each do |pet| %>
         <%= pet.name %> Approved
-    <% end %></p>   
+    <% end %></p> 
+<% elsif @application.status == "Rejected" %>  
+    <p><% @application.pets.each do |pet| %>
+        <%= pet.name %> Rejected
+    <% end %></p> 
 <% end %>
 
-
+<% form_with() do |f| %>
+    <%= f.submit 'A' %>
+    <%= f.submit 'R' %>
+<% end %>

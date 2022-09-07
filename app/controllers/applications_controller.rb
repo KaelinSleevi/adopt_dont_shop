@@ -58,7 +58,11 @@ class ApplicationsController < ApplicationController
         if params[:search].present?
             @pets = Pet.search(params[:search])
         end
-        @application.status = "Approved" 
+        if apps_params[:status] == "Approved"
+            @application.status = "Approved" 
+        elsif apps_params[:status] == "Rejected"
+            @application.status = "Rejected"
+        end
         @application.update(apps_params)
         @application.save
         redirect_to "/admin/applications/#{@application.id}"
