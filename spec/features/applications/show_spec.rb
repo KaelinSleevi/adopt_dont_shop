@@ -72,7 +72,7 @@ RSpec.describe 'The Applicants Show Page' do
         expect(page).to_not have_content("Submit this Application")
     end
 
-    it 'shows a button to approve applications when visiting application show page, and shows approved pets' do
+    it 'shows a button to approve applications when visiting admin application show page, and shows approved pets' do
         visit "/applications/#{@applicant2.id}"
         fill_in 'Search', with: "Lucille Bald"
         click_button('Submit')
@@ -85,5 +85,14 @@ RSpec.describe 'The Applicants Show Page' do
         click_button('Approve Application')
         expect(page).to have_content('Lucille Bald Approved')
         expect(page).to_not have_content('Approve Application')
+    end
+    
+    it 'shows a button to reject a pet in the admin application show page, once rejected the button is gone and shows status' do
+        visit "/admin/applications/#{@applicant2.id}"
+        click_button('Reject Application')
+        visit "/admin/applications/#{@applicant2.id}"
+        expect(page).to_not have_content('Reject Application')
+        expect(page).to_not have_content('Approve Application')
+        expect(page).to have_content('Rejected')
     end
 end
