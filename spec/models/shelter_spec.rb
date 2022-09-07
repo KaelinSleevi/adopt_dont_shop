@@ -67,5 +67,10 @@ RSpec.describe Shelter, type: :model do
         expect(@shelter_1.pet_count).to eq(3)
       end
     end
+
+
+    describe 'should have and have many' do
+      it {should have_many(:pets)}
+    end
   end
 end
