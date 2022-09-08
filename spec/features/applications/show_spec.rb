@@ -105,27 +105,27 @@ RSpec.describe 'The Applicants Show Page' do
         expect(page).to have_content('Rejected')
     end
 
-    # it 'displays that a given pet has been approved on the application' do
-    #     visit "/applications/#{@applicant2.id}"
-    #     fill_in 'Search', with: "Lobster"
-    #     click_button('Submit')
-    #     click_button("Adopt #{@pet_2.name}")
-    #     fill_in 'Description:', with: "I want pet because I need pet, ty"
-    #     click_button('Submit Application')
-    #     visit "/admin/applications/#{@applicant2.id}"
-    #     click_on('Approve Pet')
-    #     expect(page).to have_content("#{@pet_2.name} Approved")
-    # end
+    it 'displays that a given pet has been approved on the application' do
+        visit "/applications/#{@applicant2.id}"
+        fill_in 'Search', with: "Lobster"
+        click_button('Submit')
+        click_button("Adopt #{@pet_2.name}")
+        fill_in 'Description:', with: "I want pet because I need pet, ty"
+        click_button('Submit Application')
+        visit "/admin/applications/#{@applicant2.id}"
+        click_on('Approve Pet')
+        expect(page).to have_content("#{@pet_2.name} Approved")
+    end
 
-    # it 'displays that a given pet has been rejected on the application' do
-    #     visit "/applications/#{@applicant2.id}"
-    #     fill_in 'Search', with: "Lobster"
-    #     click_button('Submit')
-    #     click_button("Adopt #{@pet_2.name}")
-    #     fill_in 'Description:', with: "I want pet because I need pet, ty"
-    #     click_button('Submit Application')
-    #     visit "/admin/applications/#{@applicant2.id}"
-    #     click_on('Reject Pet')
-    #     expect(page).to have_content("#{@pet_2.name} Rejected")
-    # end
+    it 'displays that a given pet has been rejected on the application' do
+        visit "/applications/#{@applicant2.id}"
+        fill_in 'Search', with: "Lobster"
+        click_button('Submit')
+        click_button("Adopt #{@pet_2.name}")
+        fill_in 'Description:', with: "I want pet because I need pet, ty"
+        click_button('Submit Application')
+        visit "/admin/applications/#{@applicant2.id}"
+        click_on('Reject Pet')
+        expect(page).to have_content("#{@pet_2.name} Rejected")
+    end
 end
